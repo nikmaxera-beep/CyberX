@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owners</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ENTER SCREEN -->
+    <div id="enter-screen">
+        <h1>[ CLICK TO ENTER ]</h1>
+    </div>
+
+    <!-- MUSIC PLAYER -->
+    <div class="music-player">
+        <i class="fas fa-volume-up" id="volume-icon"></i>
+        <input type="range" min="0" max="100" value="50" id="volume-slider">
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="asets/music/my.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- BACKGROUND VIDEO -->
+    <video autoplay muted loop id="bg-video">
+        <source src="asets/vid/cvena.mp4" type="video/mp4">
+    </video>
+
+    <!-- DISCORD ICON -->
+    <div class="top-right">
+        <a href="https://discord.gg/nrbxTNhbbG" target="_blank">
+            <i class="fab fa-discord discord-icon"></i>
+        </a>
+    </div>
+
+    <!-- CARDS -->
+    <div class="cards">
+        <a href="../owners/html/NikaGeims.html" class="card">
+            <div class="card-box red"><img src="asets/img/NikaGeims.png">
+                <h3>Nika_Geims</h3>
+            </div>
+        </a>
+        <a href="../owners/html/NikMax.html" class="card">
+            <div class="card-box blue"><img src="/asets/img/nikmax.png">
+                <h3>NikMax</h3>
+            </div>
+        </a>
+        <a href="../owners/html/Mikland.html" class="card">
+            <div class="card-box green"><img src="/asets/img/mikland.png">
+                <h3>Mikland</h3>
+            </div>
+        </a>
+        <a href="../owners/html/jula.html" class="card">
+            <div class="card-box purple"><img src="/asets/img/jula.png">
+                <h3>JULA</h3>
+            </div>
+        </a>
+        <a href="../owners/html/NikMax.html" class="card">
+            <div class="card-box orange"><img src="/asets/img/lomta.png">
+                <h3>Lomta</h3>
+            </div>
+        </a>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
+
+

@@ -1,0 +1,182 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    background: black;
+}
+
+/* Click to Enter Overlay */
+#enter-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 9999;
+    transition: opacity 0.7s ease;
+}
+
+/* Background Video */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: -1;
+}
+
+/* Top Icons */
+.top-icons {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 22px;
+    font-size: 26px;
+    color: rgb(255, 0, 0);
+    z-index: 1000;
+}
+
+.top-icons a {
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.top-icons a:hover {
+    color: rgb(0, 0, 0);
+    transform: scale(1.2);
+}
+
+/* Back Button */
+.back-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 18px;
+    background: rgba(255, 0, 0, 0.9);
+    border-radius: 10px;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 15px red;
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.back-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px red;
+}
+
+/* Music Player */
+.music-player {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    height: 55px;
+    width: 55px;
+    background: rgb(255, 0, 0);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border: 2px solid #ff0000;
+    box-shadow: 0 0 20px rgb(255, 0, 0);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    transition: 0.4s ease;
+    z-index: 1000;
+}
+
+.music-player:hover {
+    width: 220px;
+}
+
+.music-player i {
+    font-size: 22px;
+    color: #000;
+    cursor: pointer;
+}
+
+/* Volume Slider */
+#volume-slider {
+    width: 140px;
+    opacity: 0;
+    transition: 0.4s ease;
+    accent-color: #000;
+}
+
+.music-player:hover #volume-slider {
+    opacity: 1;
+}
+
+/* About Me Section */
+.about-me {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: rgb(255, 0, 0);
+    top: 20%;
+}
+
+.profile-pic {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 4px solid red;
+    box-shadow: 0 0 25px red;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.profile-pic:hover {
+    transform: scale(1.05);
+}
+
+.about-me h1 {
+    font-size: 3rem;
+    margin: 20px 0 10px;
+}
+
+.about-me p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 20px;
+}
+
+.logo {
+    width: 100px;
+    margin-top: 20px;
+    border: 2px solid red;
+    border-radius: 10px;
+}
