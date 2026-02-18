@@ -4,18 +4,21 @@ const volumeSlider = document.getElementById("volume-slider");
 const volumeIcon = document.getElementById("volume-icon");
 const enterScreen = document.getElementById("enter-screen");
 
-// LocalStorage ლოგიკა
+// 1. ლოგიკა რეფრეშის დროს: თუ გათიშულია, დადგეს 10%-ზე
 let savedVolume = localStorage.getItem("musicVolume");
 let savedMuted = localStorage.getItem("musicMuted") === "true";
 
-if (savedVolume === null || parseFloat(savedVolume) <= 0) {
-    audio.volume = 0.2; // საწყისი ხმა 20%
+if (savedMuted || savedVolume === null || parseFloat(savedVolume) === 0) {
+    audio.volume = 0.1;
+    audio.muted = false;
+    localStorage.setItem("musicMuted", "false");
+    localStorage.setItem("musicVolume", "0.1");
 } else {
     audio.volume = parseFloat(savedVolume);
+    audio.muted = false;
 }
 
 volumeSlider.value = audio.volume * 100;
-audio.muted = savedMuted;
 updateIcon(audio.volume);
 
 function updateIcon(volumeValue) {
@@ -31,8 +34,8 @@ function updateIcon(volumeValue) {
 function startExperience() {
     if (enterScreen.style.display === "none") return;
 
-    audio.play().catch(() => console.log("Audio blocked"));
-    if (video) video.play().catch(() => console.log("Video blocked"));
+    audio.play().catch(err => console.log("Playback blocked:", err));
+    if (video) video.play().catch(() => {});
 
     enterScreen.style.opacity = "0";
     setTimeout(() => {
@@ -41,9 +44,6 @@ function startExperience() {
 }
 
 enterScreen.addEventListener("click", startExperience);
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") startExperience();
-});
 
 volumeSlider.addEventListener("input", function () {
     const volumeValue = this.value / 100;
