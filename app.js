@@ -3,72 +3,95 @@ const slider = document.getElementById("volume-slider");
 const icon = document.getElementById("volume-icon");
 const enterScreen = document.getElementById("enter-screen");
 
-// წამოვიღოთ შენახული მონაცემები
-let savedVolume = localStorage.getItem("musicVolume");
-let isMuted = localStorage.getItem("musicMuted") === "true";
-
-// მთავარი ლოგიკა: თუ ხმა 0 იყო ან დამიუტებული, დავაყენოთ 0.1 (10%)
-if (savedVolume === null || parseFloat(savedVolume) <= 0 || isMuted) {
-    savedVolume = 0.1; 
-    isMuted = false; // მოვხსნათ დამიუტება
-} else {
-    savedVolume = parseFloat(savedVolume);
-}
-
-// მნიშვნელობების მინიჭება
-music.volume = savedVolume;
-slider.value = savedVolume * 100;
-music.muted = isMuted;
+// --- MUSIC LOGIC ---
+let savedVolume = localStorage.getItem("musicVolume") || 0.1;
+music.volume = parseFloat(savedVolume);
+slider.value = music.volume * 100;
 
 function updateIcon() {
     if (music.muted || music.volume === 0) {
-        icon.classList.replace("fa-volume-up", "fa-volume-mute");
+        icon.classList.remove("fa-volume-up");
+        icon.classList.add("fa-volume-mute");
     } else {
-        icon.classList.replace("fa-volume-mute", "fa-volume-up");
+        icon.classList.remove("fa-volume-mute");
+        icon.classList.add("fa-volume-up");
     }
 }
 
-updateIcon();
+icon.addEventListener("click", () => {
+    music.muted = !music.muted;
+    updateIcon();
+});
 
 enterScreen.addEventListener("click", () => {
-    // აქაც დავაზღვიოთ: თუ play-მდე რამენაირად muted აღმოჩნდა, მოვხსნათ
-    if (music.volume <= 0) {
-        music.volume = 0.1;
-        slider.value = 10;
-    }
     music.muted = false;
-    
-    music.play().catch(() => console.log("Music play blocked"));
+    music.play().catch(() => console.log("Music blocked"));
     enterScreen.style.opacity = "0";
-    setTimeout(() => { enterScreen.style.display = "none"; }, 600);
+    setTimeout(() => { enterScreen.style.display = "none"; }, 800);
     updateIcon();
 });
 
 slider.addEventListener("input", (e) => {
     let val = e.target.value / 100;
     music.volume = val;
-    music.muted = (val === 0);
+    if (val > 0) music.muted = false; 
     localStorage.setItem("musicVolume", val);
-    localStorage.setItem("musicMuted", music.muted);
     updateIcon();
 });
 
-icon.addEventListener("click", () => {
-    music.muted = !music.muted;
-    localStorage.setItem("musicMuted", music.muted);
-    
-    // თუ ხმას ვრთავთ (unmute) და ხმა 0-ზეა, ავტომატურად ავუწიოთ 10%-ზე
-    if (!music.muted && music.volume === 0) {
-        music.volume = 0.1;
-        localStorage.setItem("musicVolume", 0.1);
+/* ========================= */
+/* STARFIELD LOGIC (RESPONSIVE) */
+/* ========================= */
+const canvas = document.getElementById("starfield");
+const ctx = canvas.getContext("2d");
+let stars = [];
+const numStars = 800;
+const speed = 5;
+
+function setupCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+class Star {
+    constructor() { this.reset(); }
+    reset() {
+        this.x = (Math.random() - 0.5) * canvas.width;
+        this.y = (Math.random() - 0.5) * canvas.height;
+        this.z = Math.random() * canvas.width;
     }
-    
-    slider.value = music.muted ? 0 : music.volume * 100;
-    updateIcon();
-});
+    update() {
+        this.z -= speed;
+        if (this.z <= 1) this.reset();
+    }
+    show() {
+        let sx = (this.x / this.z) * (canvas.width / 2) + canvas.width / 2;
+        let sy = (this.y / this.z) * (canvas.height / 2) + canvas.height / 2;
+        let r = (1 - this.z / canvas.width) * 4;
+        ctx.beginPath();
+        ctx.arc(sx, sy, r, 0, Math.PI * 2);
+        ctx.fillStyle = "white";
+        ctx.fill();
+    }
+}
 
-  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+for (let i = 0; i < numStars; i++) stars.push(new Star());
 
-  ChannelIO('boot', {
-    "pluginKey": "47765762-7a90-49f8-bb95-45060c80d045"
-  });
+function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(star => {
+        star.update();
+        star.show();
+    });
+    requestAnimationFrame(drawStars);
+}
+
+window.addEventListener("resize", setupCanvas);
+setupCanvas();
+drawStars();
+
+/* ========================= */
+/* CHANNEL IO (ორიგინალი კოდი) */
+/* ========================= */
+(function(){var w=window;if(w.ChannelIO){return;}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+ChannelIO('boot', { "pluginKey": "47765762-7a90-49f8-bb95-45060c80d045" });

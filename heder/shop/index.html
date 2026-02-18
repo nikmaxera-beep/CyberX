@@ -10,9 +10,22 @@
 </head>
 <body>
 
-    <video autoplay muted loop id="bg-video">
+    <video autoplay muted loop playsinline id="bg-video">
         <source src="/heder/asets/vid/cvena.mp4" type="video/mp4">
     </video>
+
+    <canvas id="starfield"></canvas>
+
+    <div id="buy-popup" class="popup-overlay">
+        <div class="popup-content">
+            <button class="close-popup" onclick="closePopup()">&times;</button>
+            <h2>შეძენა</h2>
+            <p>რანკის შესაძენად დაგვიკავშირდით Support-ში (მარჯვნივ ქვემოთ) ან შემოგვიერთდით Discord-ზე:</p>
+            <a href="https://discord.gg/nrbxTNhbbG" target="_blank" class="popup-discord-btn">
+                <i class="fab fa-discord"></i> DISCORD SERVER
+            </a>
+        </div>
+    </div>
 
     <div class="top-right">
         <a href="https://discord.gg/nrbxTNhbbG" target="_blank">
@@ -28,7 +41,6 @@
     </div>
 
     <main class="main-wrapper">
-        
         <section id="info" class="info-section">
             <div class="info-content">
                 <h2>ყიდვის წესი</h2>
@@ -38,7 +50,6 @@
         </section>
 
         <div class="shop-columns-container">
-            
             <div class="shop-column">
                 <div class="shop-card">
                     <h2>VIP</h2>
@@ -79,9 +90,9 @@
                     <button class="buy-btn">BUY</button>
                 </div>
             </div>
-
         </div>
     </main>
-  <script src="/heder/shop/app.js"></script>
+
+    <script src="app.js"></script>
 </body>
 </html>

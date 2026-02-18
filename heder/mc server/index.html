@@ -10,9 +10,11 @@
 </head>
 <body>
 
-    <video autoplay muted loop id="bg-video">
+    <video autoplay muted loop playsinline id="bg-video">
         <source src="/heder/asets/vid/cvena.mp4" type="video/mp4">
     </video>
+
+    <canvas id="starfield"></canvas>
 
     <div class="top-right">
         <a href="https://discord.gg/nrbxTNhbbG" target="_blank">
@@ -34,14 +36,14 @@
                 <div class="server-details">
                     <p><strong>IP:</strong> <span id="server-ip">play.cyberx.ge</span></p>
                     <p><strong>VERSION:</strong> 1.20 - 1.21+</p>
-                    <p><strong>STATUS:</strong> <span class="online-pulse">OFLINE</span></p>
-                    <p><strong>PLAYERS:</strong> <span style="color: #fff;">ERROR/ 500</span></p>
+                    <p><strong>STATUS:</strong> <span class="online-pulse">OFFLINE</span></p>
+                    <p><strong>PLAYERS:</strong> <span style="color: #fff;">ERROR / 500</span></p>
                 </div>
                 <button class="copy-btn" id="copy-button">COPY IP ADDRESS</button>
             </div>
         </section>
     </main>
 
-    <script src="/heder/mc server/app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

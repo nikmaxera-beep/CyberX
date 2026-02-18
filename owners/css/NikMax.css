@@ -7,7 +7,7 @@
 
 body {
     height: 100vh;
-    background: url("/owners/asets/img/nikmaxbackround.png") center/cover no-repeat;
+    background: url("/asets/img/bg_nikmax.webp") center/cover no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
