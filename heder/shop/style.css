@@ -1,0 +1,233 @@
+/* BASE RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background: black;
+    color: white;
+    overflow-x: hidden;
+}
+
+#bg-video {
+    position: fixed;
+    right: 0; bottom: 0;
+    min-width: 100%; min-height: 100%;
+    z-index: -1;
+    object-fit: cover;
+}
+
+/* TOP MENU - ENLARGED */
+.top-center-menu {
+    position: fixed;
+    top: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; 
+    gap: 50px; 
+    z-index: 100;
+}
+
+.top-center-menu a {
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: #ff0000;
+    text-decoration: none;
+    transition: 0.3s ease;
+    font-weight: 700;
+}
+
+.top-center-menu a:hover {
+    color: #ff4d4d;
+    text-shadow: 0 0 15px #ff0000;
+}
+
+/* MAIN LAYOUT */
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 120px 40px;
+    gap: 50px;
+}
+
+/* INFO SECTION - ENLARGED */
+.info-section {
+    width: 500px;
+    min-height: 465px; /* გასწორებულია 3-სვეტიანი რანკების სიმაღლეზე */
+    border: 3px solid #ff0000;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 45px;
+    text-align: center;
+}
+
+.info-section h2 {
+    font-size: 36px;
+    margin-bottom: 25px;
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff0000;
+}
+
+.info-section p {
+    font-size: 20px;
+    line-height: 1.8;
+}
+
+/* SHOP COLUMNS */
+.shop-columns-container {
+    display: flex;
+    gap: 30px;
+}
+
+.shop-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* SHOP CARD - ENLARGED */
+.shop-card {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 35px; /* გაზრდილი შიდა დაშორება */
+    border-radius: 25px;
+    border: 2px solid #ff0000;
+    width: 240px; /* გაიზარდა 210-დან */
+    text-align: center;
+    transition: 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.shop-card:hover:not(.disabled-card) {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 0 30px #ff0000;
+}
+
+.shop-card h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.price {
+    display: block;
+    margin: 15px 0;
+    font-size: 26px; /* ფასი უფრო დიდია */
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.buy-btn {
+    background: #ff0000;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: 'Orbitron';
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.buy-btn:hover {
+    background: white;
+    color: #ff0000;
+}
+
+/* COMING SOON STYLES */
+.disabled-card {
+    opacity: 0.5;
+    filter: grayscale(1);
+    cursor: not-allowed;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-20deg);
+    background: #ff0000;
+    color: white;
+    padding: 8px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 5;
+    white-space: nowrap;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1300px) {
+    .main-wrapper { flex-direction: column; padding-top: 150px; }
+    .shop-columns-container { justify-content: center; flex-wrap: wrap; }
+    .info-section { width: 90%; min-height: auto; }
+}
+/* ========================= */
+/* DISCORD ICON STYLE (MATCHING HOME) */
+/* ========================= */
+
+.top-right {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 35px;
+    z-index: 1000; /* რომ სხვა ელემენტების ზემოდან იყოს */
+}
+
+.discord-icon {
+    color: #ff0000;
+    transition: 0.3s ease;
+    text-decoration: none;
+}
+
+.discord-icon:hover {
+    color: #ffffff;
+    text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000;
+    cursor: pointer;
+}
+
+/* ვიდეო ფონი რომ არ აირიოს */
+#bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    object-fit: cover;
+}
+
+/* მენიუს გასწორება Shop გვერდზეც */
+.top-center-menu {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 50px;
+    z-index: 100;
+}
+
+.top-center-menu a {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #ff0000;
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+    transition: 0.3s;
+}
+
+.top-center-menu a:hover {
+    text-shadow: 0 0 15px #ff0000;
+}

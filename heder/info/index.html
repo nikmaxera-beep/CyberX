@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberX - MC Server Info</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <video autoplay muted loop id="bg-video">
+        <source src="/heder/asets/vid/cvena.mp4" type="video/mp4">
+    </video>
+
+    <div class="top-right">
+        <a href="https://discord.gg/nrbxTNhbbG" target="_blank">
+            <i class="fab fa-discord discord-icon"></i>
+        </a>
+    </div>
+
+    <div class="top-center-menu">
+        <a href="/heder/info/index.html">INFO</a>
+        <a href="/heder/shop/index.html">SHOP</a>
+        <a href="/heder/mc server/index.html">MC SERVER</a>
+        <a href="/index.html">HOME</a>
+    </div>
+
+    <main class="main-wrapper">
+        <section class="info-section">
+            <div class="info-content">
+                <h2>CyberX</h2>
+                <div class="server-details">
+                    <p><strong>DISCORD:</strong> <a href="https://discord.gg/cyberx" target="_blank" style="color: white; text-decoration: none;">discord.gg/cyberx</a></p>
+                    <p><strong>MINECRAFT IP:</strong> <span id="server-ip">play.cyberx.ge</span></p>
+                    <p><strong>INFO:</strong> ჩვენ ვართ ერთ-ერთი საუკეთესო სერვერი საქართველოში. შემოგვიერთდით და ისიამოვნეთ!</p>
+                </div>
+                <button class="copy-btn" id="copy-button">COPY IP</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

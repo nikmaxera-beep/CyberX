@@ -5,7 +5,6 @@
     --transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-
 .dark-theme {
     --bg: linear-gradient(135deg, #050505 0%, #0a192f 100%);
     --text: #fff;
@@ -24,34 +23,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
 }
 
 body {
-    background-image: var(--bg);
-    background-attachment: fixed;
+    background-color: black;
     color: var(--text);
     font-family: 'Outfit', sans-serif;
-    transition: var(--transition);
     overflow-x: hidden;
 }
 
-.back-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 18px;
-    background: rgb(10, 212, 226);
-    border-radius: 10px;
-    color: black;
-    font-weight: bold;
-    text-decoration: none;
-    box-shadow: 0 0 50px darkblue;
-    transition: 0.3s;
-    z-index: 1000;
-}
-
-#intro-screen {
+/* Splash Screen */
+#enter-screen {
     position: fixed;
     top: 0;
     left: 0;
@@ -62,38 +44,31 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 9999;
-}
-
-#enter-btn {
-    background: transparent;
-    border: none;
-    color: #fff;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 18px;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-#enter-btn:hover {
     color: var(--accent);
-    text-shadow: 0 0 10px var(--accent);
-}
-
-.hidden {
-    opacity: 0;
-    visibility: hidden;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: 0.8s;
+    letter-spacing: 5px;
+    text-shadow: 0 0 15px var(--accent);
 }
 
 #main-content {
+    background-image: var(--bg);
+    min-height: 100vh;
+    opacity: 0;
     transition: 1.5s ease;
 }
 
 #main-content.show {
     opacity: 1;
-    visibility: visible;
 }
 
+.hidden {
+    display: none;
+}
+
+/* Background Canvas */
 #bgCanvas {
     position: fixed;
     top: 0;
@@ -102,7 +77,7 @@ body {
     pointer-events: none;
 }
 
-
+/* UI Elements */
 .theme-switch-wrapper {
     position: fixed;
     top: 25px;
@@ -111,8 +86,8 @@ body {
 }
 
 .theme-switch {
-    width: 60px;
-    height: 34px;
+    width: 50px;
+    height: 26px;
     position: relative;
     display: inline-block;
 }
@@ -123,24 +98,24 @@ body {
 
 .slider {
     position: absolute;
+    cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background: #333;
     border-radius: 34px;
-    cursor: pointer;
     transition: 0.4s;
 }
 
 .slider:before {
-    content: "";
     position: absolute;
-    height: 26px;
-    width: 26px;
+    content: "";
+    height: 18px;
+    width: 18px;
     left: 4px;
     bottom: 4px;
-    background: #fff;
+    background: white;
     border-radius: 50%;
     transition: 0.4s;
 }
@@ -150,9 +125,24 @@ input:checked+.slider {
 }
 
 input:checked+.slider:before {
-    transform: translateX(26px);
+    transform: translateX(24px);
 }
 
+.back-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 18px;
+    background: var(--accent);
+    border-radius: 10px;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+/* Layout */
 .container {
     max-width: 1300px;
     margin: 0 auto;
@@ -167,12 +157,10 @@ input:checked+.slider:before {
 }
 
 .moving-name {
-    font-size: clamp(60px, 8vw, 100px);
+    font-size: clamp(50px, 8vw, 100px);
     font-weight: 900;
-    letter-spacing: 10px;
     color: var(--accent);
     animation: floatText 3s infinite ease-in-out;
-    display: inline-block;
 }
 
 @keyframes floatText {
@@ -187,21 +175,15 @@ input:checked+.slider:before {
     }
 }
 
-.dev-text {
-    font-size: 20px;
-    letter-spacing: 12px;
-    color: #888;
-    margin-bottom: 40px;
-}
-
 .profile-img {
-    width: 450px;
-    height: 550px;
+    width: 400px;
+    height: 500px;
     object-fit: cover;
-    border-radius: 50px;
+    border-radius: 30px;
     border: 3px solid var(--accent);
 }
 
+/* Skills & Projects */
 .work-section {
     display: grid;
     grid-template-columns: 400px 1fr;
@@ -217,25 +199,24 @@ input:checked+.slider:before {
 
 .skill-card-big {
     background: var(--card);
-    border-radius: 25px;
+    border-radius: 20px;
     overflow: hidden;
     border: 1px solid var(--border);
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     transition: 0.3s;
 }
 
 .skill-card-big:hover {
-    transform: translateX(15px);
-    border-color: var(--accent);
+    transform: translateX(10px);
 }
 
 .skill-header {
-    height: 80px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 40px;
-    color: #fff;
+    font-size: 30px;
+    color: white;
 }
 
 .html-bg {
@@ -248,19 +229,19 @@ input:checked+.slider:before {
 
 .js-bg {
     background: #f7df1e;
-    color: #000;
+    color: black;
 }
 
 .skill-body {
-    padding: 25px;
+    padding: 20px;
 }
 
 .project-card-giant {
     position: relative;
-    border-radius: 40px;
+    border-radius: 30px;
     overflow: hidden;
-    height: 750px;
-    border: 2px solid var(--border);
+    height: 600px;
+    border: 1px solid var(--border);
 }
 
 .giant-img {
@@ -276,25 +257,24 @@ input:checked+.slider:before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: 0.5s;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(5px);
+}
+
+.project-card-giant:hover .project-overlay {
+    opacity: 1;
 }
 
 .project-overlay span {
     border: 2px solid var(--accent);
     color: var(--accent);
-    padding: 20px 40px;
+    padding: 15px 30px;
     border-radius: 50px;
-    font-weight: 900;
-}
-
-.project-card-giant:hover .project-overlay {
-    opacity: 1;
 }
 
 footer {
@@ -305,7 +285,7 @@ footer {
 
 .icon-btn {
     color: var(--text);
-    font-size: 26px;
+    font-size: 28px;
     margin-right: 20px;
     transition: 0.3s;
 }
@@ -314,6 +294,7 @@ footer {
     color: var(--accent);
 }
 
+/* Scroll Animation */
 .reveal-scroll {
     opacity: 0;
     transform: translateY(50px);

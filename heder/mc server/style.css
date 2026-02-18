@@ -1,0 +1,179 @@
+/* BASE RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background: black;
+    color: white;
+    overflow-x: hidden;
+}
+
+#bg-video {
+    position: fixed;
+    right: 0; bottom: 0;
+    min-width: 100%; min-height: 100%;
+    z-index: -1;
+    object-fit: cover;
+}
+
+/* TOP MENU - ENLARGED */
+.top-center-menu {
+    position: fixed;
+    top: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; 
+    gap: 50px; 
+    z-index: 100;
+}
+
+.top-center-menu a {
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: #ff0000;
+    text-decoration: none;
+    transition: 0.3s ease;
+    font-weight: 700;
+}
+
+.top-center-menu a:hover {
+    color: #ff4d4d;
+    text-shadow: 0 0 15px #ff0000;
+}
+
+/* MAIN LAYOUT */
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* INFO SECTION - MASSIVE VERSION */
+.info-section {
+    width: 650px; /* უფრო დიდი ვიდრე ადრე */
+    min-height: 480px;
+    border: 3px solid #ff0000;
+    border-radius: 35px;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+}
+
+.info-content h2 {
+    font-size: 42px;
+    color: #ff0000;
+    margin-bottom: 35px;
+    text-shadow: 0 0 20px #ff0000;
+    text-align: center;
+}
+
+.server-details {
+    text-align: left;
+    font-size: 24px; /* უფრო დიდი ტექსტი */
+    line-height: 2.2;
+}
+
+.server-details strong {
+    color: #ff0000;
+    margin-right: 10px;
+}
+
+/* ONLINE PULSE */
+.online-pulse {
+    color: #ff0000;
+    font-weight: bold;
+    text-shadow: 0 0 15px #ff0000;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; text-shadow: 0 0 15px #ff0000; }
+    50% { opacity: 0.6; text-shadow: 0 0 5px s#ff0000; }
+    100% { opacity: 1; text-shadow: 0 0 15px #ff0000; }
+}
+
+/* COPY BUTTON - BOLD & LARGE */
+.copy-btn {
+    margin-top: 40px;
+    background: transparent;
+    color: #ff0000;
+    border: 2px solid #ff0000;
+    padding: 15px 45px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-family: 'Orbitron';
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.3s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.copy-btn:hover {
+    background: #ff0000;
+    color: white;
+    box-shadow: 0 0 30px #ff0000;
+    transform: translateY(-3px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 800px) {
+    .top-center-menu { gap: 20px; }
+    .top-center-menu a { font-size: 15px; }
+    .info-section { width: 95%; padding: 40px; }
+    .server-details { font-size: 18px; }
+}
+/* ========================= */
+/* DISCORD ICON STYLE */
+/* ========================= */
+
+.top-right {
+    position: fixed; /* ვიყენებთ fixed-ს რომ სქროლისას არ გაქრეს */
+    top: 30px;
+    right: 40px;
+    font-size: 35px;
+    z-index: 1000;
+}
+
+.discord-icon {
+    color: #ff0000;
+    transition: 0.3s ease;
+    text-decoration: none;
+}
+
+.discord-icon:hover {
+    color: #ffffff;
+    text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000;
+    cursor: pointer;
+}
+
+/* მენიუს ანიმაციური ხაზი (თუ Home-ზე გქონდა, აქაც დავამატოთ) */
+.top-center-menu a {
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.top-center-menu a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: #ff0000;
+    transition: 0.3s ease;
+    box-shadow: 0 0 10px #ff0000;
+}
+
+.top-center-menu a:hover::after {
+    width: 100%;
+}

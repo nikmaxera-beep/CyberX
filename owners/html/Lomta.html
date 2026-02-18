@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lomta Profile</title>
+    <link rel="stylesheet" href="/owners/css/Lomta.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="enter-screen">
+        <h1>CLICK TO ENTER</h1>
+    </div>
+
+    <video muted loop id="bg-video">
+        <source src="/owners/asets/mus/lomta.mp4" type="video/mp4">
+    </video>
+    
+    <canvas id="stars"></canvas>
+
+    <a href="/index.html" class="back-btn">უკან დაბრუნება </a>
+
+    <div class="music-player">
+        <i id="volume-icon" class="fas fa-volume-up"></i>
+        <input type="range" id="volume-slider" min="0" max="100" value="100">
+    </div>
+
+    <audio id="bgmusic" loop>
+        <source src="/owners/asets/mus/lomta.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="card">
+        <div class="profile-img"></div>
+        <h1 class="name">LOMTA</h1>
+        <p class="sub">by Lomta</p>
+
+        <div class="about">
+            <h2>About Me</h2>
+            <p class="bio">Hello, I'm Lomta!</p>
+        </div>
+
+        <div class="icons">
+            <a href="https://www.instagram.com/saba_lomtatidze1/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@L0MT-A"><i class="fab fa-youtube"></i></a>
+            <a href="https://github.com/lomtatidzesaba39-coder"><i class="fab fa-github"></i></a>
+            <a href="https://steamcommunity.com/profiles/76561199440186901/"><i class="fab fa-steam"></i></a>
+        </div>
+    </div>
+
+    <script src="/owners/js/Lomta.js"></script>
+</body>
+</html>

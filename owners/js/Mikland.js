@@ -1,35 +1,33 @@
-// 1. Splash Screen
-const enterBtn = document.getElementById('enter-btn');
-const introScreen = document.getElementById('intro-screen');
-const mainContent = document.getElementById('main-content');
+const enterScreen = document.getElementById("enter-screen");
+const mainContent = document.getElementById("main-content");
+const checkbox = document.getElementById('checkbox');
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
 
-enterBtn.addEventListener('click', () => {
-    introScreen.style.opacity = '0';
+// 1. Enter Action
+enterScreen.addEventListener("click", () => {
+    enterScreen.style.opacity = '0';
     setTimeout(() => {
-        introScreen.style.display = 'none';
+        enterScreen.style.display = 'none';
         mainContent.classList.remove('hidden');
         mainContent.classList.add('show');
+        animate(); 
     }, 800);
 });
 
-// 2. Theme Toggler
-const checkbox = document.getElementById('checkbox');
+// 2. Theme Toggle
 checkbox.addEventListener('change', () => {
     document.body.classList.toggle('light-theme');
     document.body.classList.toggle('dark-theme');
 });
 
-// 3. Particles (თეთრი ბურთულები)
-const canvas = document.getElementById('bgCanvas');
-const ctx = canvas.getContext('2d');
+// 3. Particles Animation
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
 class Particle {
-    constructor() {
-        this.reset();
-    }
+    constructor() { this.reset(); }
     reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
@@ -40,12 +38,10 @@ class Particle {
     update() {
         this.x += this.spX;
         this.y += this.spY;
-        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-            this.reset();
-        }
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
     }
     draw() {
-        ctx.fillStyle = '#ffffff'; // თეთრი ფერი
+        ctx.fillStyle = '#ffffff';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -59,12 +55,13 @@ function animate() {
     particles.forEach(p => { p.update(); p.draw(); });
     requestAnimationFrame(animate);
 }
-animate();
 
 // 4. Scroll Reveal
 window.addEventListener('scroll', () => {
     document.querySelectorAll('.reveal-scroll').forEach(el => {
-        if (el.getBoundingClientRect().top < window.innerHeight - 150) el.classList.add('active');
+        if (el.getBoundingClientRect().top < window.innerHeight - 150) {
+            el.classList.add('active');
+        }
     });
 });
 
