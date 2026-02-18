@@ -3,46 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberX - MC Server Info</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <title>CyberX - Info</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+
+    <style>
+        body { background: #000; color: #fff; margin: 0; font-family: 'Orbitron', sans-serif; overflow-x: hidden; }
+        #starfield { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+    </style>
 </head>
 <body>
 
-    <video autoplay muted loop playsinline id="bg-video">
+    <video autoplay muted loop playsinline id="bg-video" preload="none">
         <source src="/heder/asets/vid/cvena.mp4" type="video/mp4">
     </video>
 
     <canvas id="starfield"></canvas>
 
     <div class="top-right">
-        <a href="https://discord.gg/nrbxTNhbbG" target="_blank">
+        <a href="https://discord.gg/nrbxTNhbbG" target="_blank" rel="noopener">
             <i class="fab fa-discord discord-icon"></i>
         </a>
     </div>
 
-    <div class="top-center-menu">
+    <nav class="top-center-menu">
         <a href="/heder/info/index.html">INFO</a>
         <a href="/heder/shop/index.html">SHOP</a>
         <a href="/heder/mc server/index.html">MC SERVER</a>
         <a href="/index.html">HOME</a>
-    </div>
+    </nav>
 
     <main class="main-wrapper">
         <section class="info-section">
             <div class="info-content">
-                <h2>CyberX</h2>
+                <h2>ABOUT CYBERX</h2>
+                <p>CyberX არის ინოვაციური ქართული Minecraft პროექტი, რომელიც გთავაზობთ საუკეთესო სათამაშო გამოცდილებას.</p>
                 <div class="server-details">
-                    <p><strong>DISCORD:</strong> <a href="https://discord.gg/nrbxTNhbbG" target="_blank">discord.gg/cyberx</a></p>
-                    <p><strong>MINECRAFT IP:</strong> <span id="server-ip">play.cyberx.ge</span></p>
-                    <p class="description"><strong>INFO:</strong> ჩვენ ვართ ერთ-ერთი საუკეთესო სერვერი საქართველოში. შემოგვიერთდით და ისიამოვნეთ!</p>
+                    <p><strong>SERVER IP:</strong> <span id="server-ip">play.cyberx.ge</span></p>
                 </div>
-                <button class="copy-btn" id="copy-button">COPY IP</button>
+                <button class="copy-btn" id="copy-button">COPY SERVER IP</button>
             </div>
         </section>
     </main>
 
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
 </body>
 </html>
