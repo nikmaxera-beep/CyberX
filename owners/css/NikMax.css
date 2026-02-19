@@ -7,120 +7,116 @@
 
 body {
     height: 100vh;
-    background: url("/asets/img/bg_nikmax.webp") center/cover no-repeat;
+    background-color: #0c0c0c;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-}
-
-#snow {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-}
-
-
-.card {
     position: relative;
+}
+
+/* უკანა ფონი - FULL SCREEN */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("/asets/img/bg_nikmax2.webp") center/cover no-repeat fixed;
+    z-index: 1;
+    filter: brightness(0.2) blur(3px); /* ფონი უფრო მუქია, რომ პერსონაჟი გამოიკვეთოს */
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 85%;
+    max-width: 1200px;
     z-index: 2;
-    width: 380px;
-    padding: 35px;
-    text-align: center;
-    border-radius: 20px;
-
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-
-    border: 1px solid rgba(255,165,0,0.45);
-    box-shadow: 0 0 40px rgba(255,165,0,0.25);
 }
 
-.pfp img {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    border: 2px solid orange;
-    margin-bottom: 15px;
-}
-
-.name {
-    color: orange;
-    font-size: 28px;
-    margin-bottom: 10px;
-    text-shadow: 0 0 15px orange;
-}
-
-
-.bio {
-    color: #eee;
-    font-size: 14px;
-    margin-bottom: 25px;
-}
-
-
-.socials {
+.character-box {
+    width: 45%;
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
 }
 
-.socials a {
-    width: 50px;
-    height: 50px;
+/* დამრგვალებული პერსონაჟი */
+.mc-skin {
+    width: 450px; 
+    height: 450px;
+    object-fit: cover;
+    border-radius: 50%; /* წრიული ფორმა */
+    border: 5px solid orange; /* ნარინჯისფერი ჩარჩო */
+    filter: drop-shadow(0 0 25px rgba(255, 165, 0, 0.5));
+    box-shadow: 0 0 40px rgba(255, 165, 0, 0.4); /* ნეონ ნათება */
+    transition: 0.4s ease;
+}
+
+.mc-skin:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 60px rgba(255, 165, 0, 0.6);
+}
+
+.content-box {
+    width: 50%;
+}
+
+.hi-text {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.main-title {
+    font-size: 55px;
+    margin-bottom: 25px;
+    color: orange;
+    text-shadow: 0 0 20px orange;
+}
+
+.description {
+    font-size: 16px;
+    color: #ddd;
+    line-height: 1.7;
+    margin-bottom: 35px;
+    text-shadow: 1px 1px 5px black;
+}
+
+/* სოციალური ლინკები */
+.social-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icons a {
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     color: orange;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
+    font-size: 24px;
     text-decoration: none;
-
-    background: rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
-
-    border: 1px solid rgba(255,165,0,0.5);
+    border: 1px solid rgba(255, 165, 0, 0.5);
     transition: 0.3s ease;
 }
 
-.socials a:hover {
+.social-icons a:hover {
     background: orange;
     color: black;
-    box-shadow: 0 0 25px orange;
+    box-shadow: 0 0 30px orange;
     transform: scale(1.15);
 }
 
-#volume-icon {
-    font-size: 24px;
-    color: orange;
-    cursor: pointer;
-}
-
-#volume-slider {
-    width: 80%;
-    cursor: pointer;
-}
-
-.back-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 18px;
-    background: rgba(255, 174, 0, 0.9);
-    border-radius: 10px;
-    color: black;
-    font-weight: bold;
-    text-decoration: none;
-    box-shadow: 0 0 50px rgb(255, 123, 0);
-    transition: 0.3s;
-    z-index: 1000;
-}
-/* Music Player */
+/* მუსიკის პლეიერი */
 .music-player {
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: 20px;
     height: 55px;
@@ -143,23 +139,39 @@ body {
     width: 220px;
 }
 
-.music-player i {
-    font-size: 22px;
-    color: #000;
-    cursor: pointer;
-}
-
-/* Volume Slider */
 #volume-slider {
     width: 140px;
     opacity: 0;
     transition: 0.4s ease;
-    accent-color: #000000;
+    accent-color: #000;
 }
 
 .music-player:hover #volume-slider {
     opacity: 1;
 }
+
+#volume-icon {
+    font-size: 22px;
+    color: #000;
+    cursor: pointer;
+}
+
+/* უკან დაბრუნება */
+.back-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 18px;
+    background: rgba(255, 174, 0, 0.9);
+    border-radius: 10px;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 50px rgb(255, 123, 0);
+    transition: 0.3s;
+    z-index: 1000;
+}
+
 /* ENTER SCREEN */
 #enter-screen {
     position: fixed;
