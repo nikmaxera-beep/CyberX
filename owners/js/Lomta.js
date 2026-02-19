@@ -1,69 +1,88 @@
-const audio = document.getElementById("bgmusic");
-const video = document.getElementById("bg-video");
-const volumeSlider = document.getElementById("volume-slider");
-const volumeIcon = document.getElementById("volume-icon");
-const enterScreen = document.getElementById("enter-screen");
+document.addEventListener("DOMContentLoaded", function () {
 
-// 1. ლოგიკა რეფრეშის დროს: თუ გათიშულია, დადგეს 10%-ზე
-let savedVolume = localStorage.getItem("musicVolume");
-let savedMuted = localStorage.getItem("musicMuted") === "true";
+    const audio = document.getElementById("bg-music");
+    const video = document.getElementById("bg-video");
+    const volumeSlider = document.getElementById("volume-slider");
+    const volumeIcon = document.getElementById("volume-icon");
+    const enterScreen = document.getElementById("enter-screen");
 
-if (savedMuted || savedVolume === null || parseFloat(savedVolume) === 0) {
-    audio.volume = 0.1;
-    audio.muted = false;
-    localStorage.setItem("musicMuted", "false");
-    localStorage.setItem("musicVolume", "0.1");
-} else {
-    audio.volume = parseFloat(savedVolume);
-    audio.muted = false;
-}
+    let lastVolume = 0.5; // remember previous volume
 
-volumeSlider.value = audio.volume * 100;
-updateIcon(audio.volume);
+    // ===== START EXPERIENCE =====
+    function startExperience() {
+        if (audio) audio.play().catch(() => {});
+        if (video) video.play().catch(() => {});
 
-function updateIcon(volumeValue) {
-    if (audio.muted || volumeValue === 0) {
-        volumeIcon.className = "fas fa-volume-mute";
-    } else if (volumeValue <= 0.5) {
-        volumeIcon.className = "fas fa-volume-down";
-    } else {
-        volumeIcon.className = "fas fa-volume-up";
-    }
-}
-
-function startExperience() {
-    if (enterScreen.style.display === "none") return;
-
-    audio.play().catch(err => console.log("Playback blocked:", err));
-    if (video) video.play().catch(() => {});
-
-    enterScreen.style.opacity = "0";
-    setTimeout(() => {
-        enterScreen.style.display = "none";
-    }, 700);
-}
-
-enterScreen.addEventListener("click", startExperience);
-
-volumeSlider.addEventListener("input", function () {
-    const volumeValue = this.value / 100;
-    audio.volume = volumeValue;
-    audio.muted = (volumeValue === 0);
-    localStorage.setItem("musicVolume", volumeValue);
-    localStorage.setItem("musicMuted", audio.muted);
-    updateIcon(volumeValue);
-});
-
-volumeIcon.addEventListener("click", () => {
-    if (audio.muted) {
-        audio.muted = false;
-        if (audio.volume === 0) {
-            audio.volume = 0.1;
-            volumeSlider.value = 10;
+        if (enterScreen) {
+            enterScreen.style.opacity = "0";
+            setTimeout(() => {
+                enterScreen.style.display = "none";
+            }, 700);
         }
-    } else {
-        audio.muted = true;
     }
-    localStorage.setItem("musicMuted", audio.muted);
-    updateIcon(audio.volume);
+
+    if (enterScreen) enterScreen.addEventListener("click", startExperience);
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") startExperience();
+    });
+
+    // ===== INITIAL VOLUME =====
+    if (audio && volumeSlider) {
+        const v = volumeSlider.value / 100;
+        audio.volume = v;
+        lastVolume = v;
+        updateVolumeIcon(v);
+        volumeSlider.style.setProperty("--vol", volumeSlider.value + "%");
+    }
+
+    // ===== VOLUME SLIDER =====
+    if (volumeSlider && audio) {
+        volumeSlider.addEventListener("input", function () {
+            const v = this.value / 100;
+
+            audio.volume = v;
+            audio.muted = v === 0;
+
+            if (v > 0) lastVolume = v;
+
+            this.style.setProperty("--vol", this.value + "%");
+            updateVolumeIcon(v);
+        });
+    }
+
+    // ===== ICON CLICK (MUTE / UNMUTE) =====
+    if (volumeIcon && audio && volumeSlider) {
+        volumeIcon.addEventListener("click", () => {
+
+            if (!audio.muted && audio.volume > 0) {
+                // mute
+                lastVolume = audio.volume;
+                audio.muted = true;
+                audio.volume = 0;
+                volumeSlider.value = 0;
+                volumeSlider.style.setProperty("--vol", "0%");
+                updateVolumeIcon(0);
+
+            } else {
+                // restore
+                audio.muted = false;
+                audio.volume = lastVolume || 0.5;
+                volumeSlider.value = audio.volume * 100;
+                volumeSlider.style.setProperty("--vol", volumeSlider.value + "%");
+                updateVolumeIcon(audio.volume);
+            }
+
+        });
+    }
+
+    // ===== ICON STATE =====
+    function updateVolumeIcon(v) {
+        if (!volumeIcon) return;
+
+        if (v === 0) volumeIcon.textContent = "🔇";
+        else if (v < 0.5) volumeIcon.textContent = "🔉";
+        else volumeIcon.textContent = "🔊";
+    }
+
 });
